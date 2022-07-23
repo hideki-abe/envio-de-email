@@ -17,11 +17,22 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
+    implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+
+
+
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
+
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
+
 }
 
 tasks.named('test') {

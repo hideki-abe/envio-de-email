@@ -13,7 +13,6 @@ public class Emails {
         Candidato[] response = template.getForObject("http://localhost:8082/zghero/candidatos", Candidato[].class);
         assert response != null;
         for (Candidato candidato : response) {
-            System.out.println(candidato.getEmail());
             emails.add(candidato.getEmail());
         }
         return emails;

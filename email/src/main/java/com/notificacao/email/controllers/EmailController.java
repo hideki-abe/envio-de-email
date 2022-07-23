@@ -2,7 +2,8 @@ package com.notificacao.email.controllers;
 
 
 import com.notificacao.email.consumer.Emails;
-import com.notificacao.email.dtos.EmailDto;
+import com.notificacao.email.consumer.ProcessadorVagas;
+import com.notificacao.email.models.Email;
 import com.notificacao.email.models.EmailModel;
 import com.notificacao.email.services.EmailService;
 import org.springframework.beans.BeanUtils;
@@ -19,19 +20,22 @@ import javax.validation.Valid;
 @RestController
 public class EmailController {
 
-    @Autowired
-    EmailService emailService;
+    EmailService emailService = new EmailService();
 
-    @PostMapping("/sending-email")
+    public EmailController(){
+        ProcessadorVagas processador = new ProcessadorVagas();
+        processador.consumer(emailService);
+    }
+
+    @GetMapping("/sending-email")
     public ResponseEntity<EmailModel> sendingEmail() {
         EmailModel emailModel = new EmailModel();
         Emails emails = new Emails();
-        //System.out.println(emails.getEmails().get(0));
         for(String email: emails.getEmails()){
             emailModel.setEmailTo(email);
             emailService.sendEmail(emailModel);
+            System.out.println("Enviando um email");
         }
         return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
     }
-
 }
